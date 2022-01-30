@@ -1,0 +1,34 @@
+version: "3.8"
+services:
+  config-server:
+    image: config-server
+    ports:
+      - "8888:8888"
+  eureka-peer1:
+    image: eureka-server
+    environment:
+      - "SPRING_PROFILES_ACTIVE=peer1"
+    ports:
+      - "8761:8761"
+  eureka-peer2:
+    image: eureka-server
+    environment:
+      - "SPRING_PROFILES_ACTIVE=peer2"
+    ports:
+      - "8762:8762"
+  activity-service:
+    image: activity-service
+    environment:
+      - "SPRING_PROFILES_ACTIVE=lazy"
+    ports:
+      - "8010:8010"
+  decision-service:
+    image: decision-service
+    environment:
+      - "SPRING_PROFILES_ACTIVE=polite"
+    ports:
+      - "8000:8000"
+  cookie-service:
+    image: cookie-service
+    ports:
+      - "8080:8080"
